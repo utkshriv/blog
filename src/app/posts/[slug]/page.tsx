@@ -1,11 +1,12 @@
-import { getPostBySlug, getAllPosts } from '@/lib/posts'
+import { getContentService } from '@/services/factory'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 export async function generateStaticParams() {
-    const posts = getAllPosts()
+    const service = getContentService()
+    const posts = await service.getDailyLogs()
     return posts.map((post) => ({
         slug: post.slug,
     }))
@@ -13,7 +14,8 @@ export async function generateStaticParams() {
 
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
-    const post = getPostBySlug(slug)
+    const service = getContentService()
+    const post = await service.getPostBySlug(slug)
 
     if (!post) {
         return (

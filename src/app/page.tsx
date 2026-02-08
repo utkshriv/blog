@@ -1,13 +1,19 @@
 import Link from 'next/link'
-import { getAllPosts } from '@/lib/posts'
+import { getContentService } from '@/services/factory'
 import LeetCodeTracker from '@/components/LeetCodeTracker'
+import { Card } from '@/components/ui/Card'
+import { Badge } from '@/components/ui/Badge'
+import { MatrixBackground } from '@/components/ui/MatrixBackground'
+import styles from './page.module.css'
 
-export default function Home() {
-  const posts = getAllPosts()
+export default async function Home() {
+  const service = getContentService()
+  const posts = await service.getDailyLogs()
 
   return (
-    <section>
-      <div className="hero">
+    <section style={{ position: 'relative', zIndex: 1 }}>
+      <MatrixBackground />
+      <div className={styles.hero}>
         <h1 className="text-gradient">
           The Redemption Arc
         </h1>
@@ -18,29 +24,31 @@ export default function Home() {
         <LeetCodeTracker />
       </div>
 
-      <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--card-border)', paddingBottom: '0.5rem' }}>
+      <h2 className={styles.sectionTitle}>
         Log Entries
       </h2>
 
-      <div className="posts-grid">
+      <div className={styles.postsGrid}>
         {posts.map((post) => (
-          <Link key={post.slug} href={`/posts/${post.slug}`} className="card">
-            <div style={{ fontSize: '0.85rem', color: 'var(--primary)', marginBottom: '0.5rem' }}>
-              {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </div>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
-              {post.title}
-            </h3>
-            <p style={{ color: 'var(--muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>
-              {post.excerpt}
-            </p>
-            <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
-              {post.tags.map(tag => (
-                <span key={tag} style={{ fontSize: '0.75rem', background: '#222', padding: '0.2rem 0.5rem', borderRadius: '4px', color: '#ccc' }}>
-                  #{tag}
-                </span>
-              ))}
-            </div>
+          <Link key={post.slug} href={`/posts/${post.slug}`} passHref style={{ display: 'contents' }}>
+            <Card hoverEffect>
+              <div className={styles.postDate}>
+                {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </div>
+              <h3 className={styles.postTitle}>
+                {post.title}
+              </h3>
+              <p className={styles.postExcerpt}>
+                {post.excerpt}
+              </p>
+              <div className={styles.tags}>
+                {post.tags.map(tag => (
+                  <Badge key={tag} variant="default">
+                    #{tag}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
           </Link>
         ))}
       </div>

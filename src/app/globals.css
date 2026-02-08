@@ -64,45 +64,7 @@ a:hover {
   -webkit-text-fill-color: transparent;
 }
 
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  display: block;
-}
 
-.card:hover {
-  transform: translateY(-2px);
-  border-color: var(--primary);
-}
-
-.hero {
-  padding: 6rem 0;
-  text-align: left;
-}
-
-.hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  letter-spacing: -0.05em;
-  line-height: 1.1;
-}
-
-.hero p {
-  font-size: 1.25rem;
-  color: var(--muted);
-  max-width: 600px;
-}
-
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
 
 /* Typography (Prose) */
 .prose {

@@ -1,0 +1,31 @@
+.badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+}
+
+.default {
+    background: #222;
+    color: #ccc;
+}
+
+.outline {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--muted);
+}
+
+.secondary {
+    background: rgba(189, 0, 255, 0.1);
+    /* Secondary color with opacity */
+    color: var(--secondary);
+}
+
+.accent {
+    background: rgba(0, 255, 157, 0.1);
+    /* Primary color with opacity */
+    color: var(--primary);
+}

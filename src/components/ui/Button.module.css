@@ -1,0 +1,64 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+}
+
+/* Variants */
+.primary {
+    background: var(--primary);
+    color: #000;
+}
+
+.primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.secondary {
+    background: var(--secondary);
+    color: #fff;
+}
+
+.outline {
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--foreground);
+}
+
+.outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.ghost {
+    background: transparent;
+    color: var(--muted);
+}
+
+.ghost:hover {
+    color: var(--foreground);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Sizes */
+.sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+.md {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+.lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}

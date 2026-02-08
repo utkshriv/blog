@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
@@ -18,21 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="container">
-          <header style={{ padding: '2rem 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-              botthef <span style={{ color: 'var(--primary)', fontSize: '0.8em' }}>// redemption</span>
-            </h1>
-            <nav style={{ display: 'flex', gap: '1.5rem' }}>
-              <a href="/">Home</a>
-              <a href="/about">About</a>
-            </nav>
-          </header>
+          <Header />
           <main style={{ minHeight: '80vh' }}>
             {children}
           </main>
-          <footer style={{ padding: '4rem 0', textAlign: 'center', color: 'var(--muted)', fontSize: '0.9rem' }}>
-            © {new Date().getFullYear()} botthef. All rights reserved.
-          </footer>
+          <Footer />
         </div>
       </body>
     </html>
