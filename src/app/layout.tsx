@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 export const metadata: Metadata = {
   title: 'botthef',
   description: 'A redemption arc. Documenting the journey to mastery.',
+  icons: {
+    icon: '/logo.png',
+  },
 }
 
 export default function RootLayout({
