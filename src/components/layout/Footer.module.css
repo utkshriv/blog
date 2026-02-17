@@ -1,7 +1,8 @@
 .footer {
-    padding: 4rem 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
     text-align: center;
     color: var(--muted);
-    font-size: 0.9rem;
-    margin-top: auto;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--card-border);
 }

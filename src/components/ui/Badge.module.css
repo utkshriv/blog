@@ -19,13 +19,15 @@
 }
 
 .secondary {
-    background: rgba(189, 0, 255, 0.1);
-    /* Secondary color with opacity */
-    color: var(--secondary);
+    background: rgba(184, 168, 230, 0.15);
+    /* Lavender with opacity */
+    color: var(--primary);
+    border: 1px solid var(--primary);
 }
 
 .accent {
-    background: rgba(0, 255, 157, 0.1);
-    /* Primary color with opacity */
-    color: var(--primary);
+    background: rgba(255, 179, 204, 0.15);
+    /* Rose pink with opacity */
+    color: var(--pastel-pink);
+    border: 1px solid var(--pastel-pink);
 }

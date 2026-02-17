@@ -1,57 +1,45 @@
-import Link from 'next/link'
-import { getContentService } from '@/services/factory'
-import LeetCodeTracker from '@/components/LeetCodeTracker'
-import { Card } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { MatrixBackground } from '@/components/ui/MatrixBackground'
-import styles from './page.module.css'
+import Image from 'next/image'
+import { SocialLinks } from '@/components/SocialLinks'
+import styles from './home.module.css'
 
-export default async function Home() {
-  const service = getContentService()
-  const posts = await service.getDailyLogs()
-
+export default function Home() {
   return (
-    <section style={{ position: 'relative', zIndex: 1 }}>
-      <MatrixBackground />
-      <div className={styles.hero}>
-        <h1 className="text-gradient">
-          The Redemption Arc
-        </h1>
-        <p>
-          Documenting the journey from rejection to mastery.
-          Solving problems, building systems, and proving them wrong.
-        </p>
-        <LeetCodeTracker />
+    <section className={styles.section}>
+      <div className={styles.container}>
+        {/* Left Pane - Content */}
+        <div className={styles.leftPane}>
+          {/* Hero Section */}
+          <div className={styles.hero}>
+            <h1 className={styles.name}>Utkarsh</h1>
+            <h2 className={styles.mainTitle}>Full Stack</h2>
+            <h2 className={styles.mainTitle}>Developer</h2>
+            <p className={styles.bio}>
+              I love creating products that solve real problems.
+              Passionate about data structures, algorithms, and building scalable systems.
+            </p>
+          </div>
+
+          {/* Social Links */}
+          <SocialLinks />
+        </div>
+
+        {/* Right Pane - Caricature with Blob */}
+        <div className={styles.rightPane}>
+          <div className={styles.blobContainer}>
+            <div className={styles.blob}></div>
+            <Image
+              src="/caricature.png"
+              alt="Utkarsh - Developer Caricature"
+              width={500}
+              height={500}
+              className={styles.caricature}
+              priority
+            />
+          </div>
+        </div>
       </div>
 
-      <h2 className={styles.sectionTitle}>
-        Log Entries
-      </h2>
 
-      <div className={styles.postsGrid}>
-        {posts.map((post) => (
-          <Link key={post.slug} href={`/posts/${post.slug}`} passHref style={{ display: 'contents' }}>
-            <Card hoverEffect>
-              <div className={styles.postDate}>
-                {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </div>
-              <h3 className={styles.postTitle}>
-                {post.title}
-              </h3>
-              <p className={styles.postExcerpt}>
-                {post.excerpt}
-              </p>
-              <div className={styles.tags}>
-                {post.tags.map(tag => (
-                  <Badge key={tag} variant="default">
-                    #{tag}
-                  </Badge>
-                ))}
-              </div>
-            </Card>
-          </Link>
-        ))}
-      </div>
     </section>
   )
 }

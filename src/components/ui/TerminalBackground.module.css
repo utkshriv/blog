@@ -1,0 +1,21 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  overflow: hidden;
+  animation: throb 2.5s ease-in-out infinite;
+}
+
+@keyframes throb {
+  0%, 100% {
+    box-shadow: 0 0 6px var(--glow-purple), 0 0 12px var(--glow-purple);
+    border-color: var(--primary);
+  }
+  50% {
+    box-shadow: 0 0 16px var(--glow-purple), 0 0 32px var(--glow-purple);
+    border-color: #d4c8f5;
+  }
+}

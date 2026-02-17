@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import styles from './LeetCodeTracker.module.css'
 
 export default function LeetCodeTracker() {
     // Hardcoded for now, can be replaced with API data later
@@ -12,28 +13,29 @@ export default function LeetCodeTracker() {
     }
 
     return (
-        <div className="card" style={{ marginTop: '2rem' }}>
-            <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', borderBottom: '1px solid var(--card-border)', paddingBottom: '0.5rem' }}>
-                LeetCode Grind
+        <div className={styles.container}>
+            <h3 className={styles.title}>
+                LeetCode Progress
             </h3>
-            <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'space-around' }}>
-                <div style={{ textAlign: 'center' }}>
-                    <div style={{ color: '#00b8a3', fontWeight: 'bold', fontSize: '1.5rem' }}>{stats.easy}</div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Easy</div>
+            <div className={styles.stats}>
+                <div className={styles.stat}>
+                    <div className={styles.dotEasy}></div>
+                    <div className={styles.valueEasy}>{stats.easy}</div>
+                    <div className={styles.label}>Easy</div>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                    <div style={{ color: '#ffc01e', fontWeight: 'bold', fontSize: '1.5rem' }}>{stats.medium}</div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Medium</div>
+                <div className={styles.stat}>
+                    <div className={styles.dotMedium}></div>
+                    <div className={styles.valueMedium}>{stats.medium}</div>
+                    <div className={styles.label}>Medium</div>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                    <div style={{ color: '#ff375f', fontWeight: 'bold', fontSize: '1.5rem' }}>{stats.hard}</div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--muted)' }}>Hard</div>
+                <div className={styles.stat}>
+                    <div className={styles.dotHard}></div>
+                    <div className={styles.valueHard}>{stats.hard}</div>
+                    <div className={styles.label}>Hard</div>
                 </div>
             </div>
-            <div style={{ marginTop: '1rem', background: '#222', borderRadius: '4px', height: '6px', overflow: 'hidden', display: 'flex' }}>
-                <div style={{ flex: stats.easy, background: '#00b8a3' }}></div>
-                <div style={{ flex: stats.medium, background: '#ffc01e' }}></div>
-                <div style={{ flex: stats.hard, background: '#ff375f' }}></div>
+            <div className={styles.total}>
+                Total: {stats.total} problems solved
             </div>
         </div>
     )

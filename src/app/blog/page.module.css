@@ -1,0 +1,111 @@
+.section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  flex: 1;
+  align-items: stretch;
+  padding: 2rem 3rem;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Left Pane */
+.leftPane {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.hero {
+  padding-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.05em;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.postDate {
+  font-size: 0.8rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.postTitle {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.postExcerpt {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.tags {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Right Pane */
+.rightPane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+  }
+
+  .section {
+    overflow-y: auto;
+  }
+
+  .rightPane {
+    height: 500px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+}

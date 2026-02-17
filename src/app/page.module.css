@@ -54,3 +54,18 @@
   display: flex;
   gap: 0.5rem;
 }
+
+.sideLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 968px) {
+  .sideLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}

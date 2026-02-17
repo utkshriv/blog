@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 export const metadata: Metadata = {
   title: 'botthef',
-  description: 'A redemption arc. Documenting the journey to mastery.',
+  description: 'Developer portfolio showcasing projects, blog posts, and technical playbooks.',
   icons: {
     icon: '/logo.png',
   },
@@ -22,13 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="container">
-          <Header />
-          <main style={{ minHeight: '80vh' }}>
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <Header />
+        <main style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0, overflow: 'hidden' }}>
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   )

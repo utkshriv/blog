@@ -1,0 +1,179 @@
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 2rem;
+  flex: 1;
+  align-items: center;
+  padding: 2rem 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.leftPane {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-right: 2rem;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.name {
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+}
+
+.mainTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.bio {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.rightPane {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+}
+
+.blobContainer {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blob {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(184, 168, 230, 0.15), rgba(255, 179, 204, 0.12));
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: blob-morph 8s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes blob-morph {
+  0%, 100% {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+  25% {
+    border-radius: 60% 40% 50% 50% / 50% 60% 40% 60%;
+  }
+  50% {
+    border-radius: 50% 50% 30% 70% / 60% 40% 70% 40%;
+  }
+  75% {
+    border-radius: 70% 30% 60% 40% / 50% 70% 30% 60%;
+  }
+}
+
+.caricature {
+  position: relative;
+  z-index: 2;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  width: 100%;
+  height: auto;
+  max-width: 450px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .mainTitle {
+    font-size: 4rem;
+  }
+
+  .blobContainer {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 968px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 1rem 0;
+  }
+
+  .rightPane {
+    order: 1;
+  }
+
+  .leftPane {
+    order: 2;
+    padding-right: 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  .mainTitle {
+    font-size: 3.5rem;
+  }
+
+  .bio {
+    max-width: 100%;
+  }
+
+  .blobContainer {
+    max-width: 350px;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .mainTitle {
+    font-size: 2.75rem;
+  }
+
+  .bio {
+    font-size: 0.95rem;
+  }
+
+  .blobContainer {
+    max-width: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+}

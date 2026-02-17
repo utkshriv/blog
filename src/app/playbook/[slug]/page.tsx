@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { ProblemList } from '@/components/modules/ProblemList';
+import { ProblemList } from '@/components/playbook/ProblemList';
 import styles from './page.module.css';
 
 export async function generateStaticParams() {

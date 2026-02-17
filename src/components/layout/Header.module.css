@@ -1,8 +1,10 @@
 .header {
-    padding: 2rem 0;
+    width: 100%;
+    padding: 1.25rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--card-border);
 }
 
 .logoLink {
@@ -16,6 +18,21 @@
     gap: 1.5rem;
 }
 
+.nav a {
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
 .nav a:hover {
     color: var(--primary);
+}
+
+.nav a.active {
+    background: var(--gradient-purple-blue);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: calc(0.5rem - 2px);
 }
