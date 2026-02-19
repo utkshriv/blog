@@ -4,6 +4,11 @@ import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { SignJWT } from 'jose';
 
+const allowedEmails = (process.env.ADMIN_EMAILS ?? process.env.ADMIN_EMAIL ?? '')
+  .split(',')
+  .map((e) => e.trim())
+  .filter(Boolean);
+
 const devProviders =
   process.env.NODE_ENV === 'development'
     ? [
@@ -11,7 +16,7 @@ const devProviders =
           name: 'Dev Login',
           credentials: { email: { label: 'Email', type: 'email' } },
           async authorize(credentials) {
-            if (credentials?.email === process.env.ADMIN_EMAIL) {
+            if (credentials?.email && allowedEmails.includes(credentials.email)) {
               return { id: '1', email: credentials!.email, name: 'Dev Admin' };
             }
             return null;
@@ -34,7 +39,7 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
-      return user.email === process.env.ADMIN_EMAIL;
+      return !!user.email && allowedEmails.includes(user.email);
     },
     async session({ session }) {
       return session;

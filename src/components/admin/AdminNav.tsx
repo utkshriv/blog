@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { signOut } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/Button';
 import styles from './AdminNav.module.css';
 
@@ -14,6 +14,7 @@ const links = [
 
 export function AdminNav() {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   function isActive(href: string, exact: boolean) {
     return exact ? pathname === href : pathname.startsWith(href);
@@ -32,13 +33,23 @@ export function AdminNav() {
           </Link>
         ))}
       </nav>
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => signOut({ callbackUrl: '/' })}
-      >
-        Sign out
-      </Button>
+      {status === 'loading' ? null : session ? (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => signOut({ callbackUrl: '/' })}
+        >
+          Sign out
+        </Button>
+      ) : (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => signIn()}
+        >
+          Sign in
+        </Button>
+      )}
     </div>
   );
 }
