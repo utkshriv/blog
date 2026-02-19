@@ -137,6 +137,39 @@ All pages are React Server Components by default (async functions). Data fetchin
 
 ---
 
+## Authentication & Admin Implementation
+
+The admin area is protected by OAuth-based authentication and restricted to whitelisted emails.
+
+### Auth Architecture (NextAuth.js)
+
+**Providers**: GitHub and Google OAuth.
+**Access Control**: Whitelist based on `ADMIN_EMAIL` environment variable.
+
+**Core Files**:
+- `src/app/api/auth/[...nextauth]/route.ts`: NextAuth handler with whitelisting logic in `signIn` callback.
+- `src/middleware.ts`: Protects `/admin` routes by checking for a valid session.
+- `src/lib/auth.ts`: Shared auth options and helper to get the JWT for backend calls.
+
+### Admin Flow
+
+1. **Login**: User hits `/admin`, middleware redirects to `/api/auth/signin` if not authenticated.
+2. **Whitelisting**: `signIn` callback checks `user.email === process.env.ADMIN_EMAIL`. If false, access is denied.
+3. **JWT Management**: NextAuth `jwt` callback must include the raw token or custom claims required by the `blog-backend`.
+4. **API Requests**: Frontend calls to `blog-backend` (Lambda/API Gateway) must include the JWT in the `Authorization: Bearer <token>` header.
+
+### Admin Routes (`src/app/admin/`)
+
+| URL Route | Purpose |
+|-----------|---------|
+| `/admin` | Dashboard / Overview |
+| `/admin/blog` | List and manage blog posts |
+| `/admin/blog/new` | Editor for new post |
+| `/admin/blog/[slug]/edit` | Editor for existing post |
+| `/admin/playbook` | Manage playbook modules and problems |
+
+---
+
 ## Key Files & Their Roles
 
 **Service Layer**:
@@ -185,16 +218,29 @@ All pages are React Server Components by default (async functions). Data fetchin
 
 ---
 
-## AWS Integration Notes
+## Environment Variables & Integration
 
-**Required environment variables** (for `AwsContentService`):
+**Core environment variables**:
 ```env
+# Content Access
 USE_MOCK=false
 AWS_ACCESS_KEY_ID=<key>
 AWS_SECRET_ACCESS_KEY=<secret>
-AWS_REGION=us-east-1
+AWS_REGION=us-west-2
 DYNAMODB_TABLE=botthef-content
 S3_BUCKET=botthef-content-bucket
+
+# NextAuth (Authentication)
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=<random-secret>
+GITHUB_ID=<github-client-id>
+GITHUB_SECRET=<github-client-secret>
+GOOGLE_CLIENT_ID=<google-client-id>
+GOOGLE_CLIENT_SECRET=<google-client-secret>
+ADMIN_EMAIL=your-email@example.com
+
+# Backend API (Writes)
+NEXT_PUBLIC_API_URL=<api-gateway-url>
 ```
 
 **Without AWS credentials**: App automatically falls back to `MockContentService` and reads from `src/content/blog/`.

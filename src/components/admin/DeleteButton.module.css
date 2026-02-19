@@ -1,0 +1,13 @@
+.danger {
+  color: var(--error) !important;
+}
+
+.danger:hover {
+  background: rgba(255, 179, 204, 0.08) !important;
+}
+
+.confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}

@@ -1,0 +1,34 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 1rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.tab {
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.tab:hover {
+  color: var(--primary);
+}
+
+.active {
+  background: var(--gradient-purple-blue);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: calc(0.5rem - 2px);
+}

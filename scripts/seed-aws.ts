@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
 
-const region = process.env.AWS_REGION || "us-east-1";
+const region = process.env.AWS_REGION || "us-west-2";
 const TABLE_NAME = process.env.DYNAMODB_TABLE || 'botthef-content';
 const BUCKET_NAME = process.env.S3_BUCKET || 'botthef-content-bucket';
 
