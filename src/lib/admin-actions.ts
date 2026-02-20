@@ -24,6 +24,12 @@ async function apiFetch(path: string, options: RequestInit) {
 
 // ── Blog ─────────────────────────────────────────────────────────────────────
 
+export interface Media {
+  key: string;
+  s3Key: string;
+  type: string;
+}
+
 export interface BlogPayload {
   slug: string;
   title: string;
@@ -31,6 +37,7 @@ export interface BlogPayload {
   excerpt: string;
   tags: string[];
   content: string;
+  media?: Media[];
 }
 
 export async function createPost(payload: BlogPayload) {
@@ -65,6 +72,7 @@ export interface ProblemPayload {
   status: 'New' | 'Due' | 'Review';
   pseudocode: string;
   tags?: string[];
+  media?: Media[];
 }
 
 export interface ModulePayload {
@@ -74,6 +82,7 @@ export interface ModulePayload {
   content: string;
   order: number;
   problems: ProblemPayload[];
+  media?: Media[];
 }
 
 export async function createModule(payload: ModulePayload) {
@@ -92,6 +101,7 @@ export async function updateModule(
     order?: number;
     upsert_problems?: ProblemPayload[];
     delete_problem_ids?: string[];
+    media?: Media[];
   }
 ) {
   const result = await apiFetch(`/api/playbook/${slug}`, { method: 'PUT', body: JSON.stringify(payload) });

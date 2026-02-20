@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createModule, updateModule, ModulePayload, ProblemPayload } from '@/lib/admin-actions';
+import { createModule, updateModule, ModulePayload, ProblemPayload, Media } from '@/lib/admin-actions';
 import { Button } from '@/components/ui/Button';
+import { MediaUploader } from './MediaUploader';
 import styles from './Editor.module.css';
 
 interface Props {
@@ -38,6 +39,8 @@ export function ModuleEditor({ initialData = {}, mode }: Props) {
     initialData.problems ?? []
   );
 
+  const [media, setMedia] = useState<Media[]>(initialData.media ?? []);
+
   function setField(field: keyof typeof form, value: string | number) {
     setForm((f) => ({ ...f, [field]: value }));
   }
@@ -66,7 +69,7 @@ export function ModuleEditor({ initialData = {}, mode }: Props) {
     setError('');
     try {
       if (mode === 'create') {
-        await createModule({ ...form, problems });
+        await createModule({ ...form, problems, media });
       } else {
         await updateModule(form.slug, {
           title: form.title,
@@ -74,6 +77,7 @@ export function ModuleEditor({ initialData = {}, mode }: Props) {
           content: form.content,
           order: form.order,
           upsert_problems: problems,
+          media,
         });
       }
       router.push('/admin/playbook');
@@ -147,6 +151,13 @@ export function ModuleEditor({ initialData = {}, mode }: Props) {
           rows={14}
         />
       </label>
+
+      <MediaUploader
+        entityType="playbook"
+        entitySlug={form.slug}
+        media={media}
+        onChange={setMedia}
+      />
 
       {/* ── Problems ───────────────────────────────────────── */}
       <p className={styles.sectionHeading}>Problems</p>

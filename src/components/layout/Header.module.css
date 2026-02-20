@@ -36,3 +36,12 @@
     border-bottom: 2px solid var(--primary);
     padding-bottom: calc(0.5rem - 2px);
 }
+
+.nav a.adminActive {
+    background: var(--gradient-purple-blue);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: calc(0.5rem - 2px);
+}

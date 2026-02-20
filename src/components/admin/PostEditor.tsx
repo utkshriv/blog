@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createPost, updatePost, BlogPayload } from '@/lib/admin-actions';
+import { createPost, updatePost, BlogPayload, Media } from '@/lib/admin-actions';
 import { Button } from '@/components/ui/Button';
+import { MediaUploader } from './MediaUploader';
 import styles from './Editor.module.css';
 
 interface Props {
@@ -26,6 +27,7 @@ export function PostEditor({ initialData = {}, mode }: Props) {
   });
 
   const [tagInput, setTagInput] = useState(form.tags.join(', '));
+  const [media, setMedia] = useState<Media[]>(initialData.media ?? []);
 
   function set(field: keyof BlogPayload, value: string) {
     setForm((f) => ({ ...f, [field]: value }));
@@ -35,7 +37,11 @@ export function PostEditor({ initialData = {}, mode }: Props) {
     e.preventDefault();
     setSaving(true);
     setError('');
-    const payload = { ...form, tags: tagInput.split(',').map((t) => t.trim()).filter(Boolean) };
+    const payload = {
+      ...form,
+      tags: tagInput.split(',').map((t) => t.trim()).filter(Boolean),
+      media,
+    };
     try {
       if (mode === 'create') {
         await createPost(payload);
@@ -123,6 +129,13 @@ export function PostEditor({ initialData = {}, mode }: Props) {
           rows={22}
         />
       </label>
+
+      <MediaUploader
+        entityType="blog"
+        entitySlug={form.slug}
+        media={media}
+        onChange={setMedia}
+      />
 
       <div className={styles.actions}>
         <Button type="submit" variant="primary" disabled={saving}>
