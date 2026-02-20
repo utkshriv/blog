@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getContentService } from '@/services/factory';
 import { PostEditor } from '@/components/admin/PostEditor';
 import { notFound } from 'next/navigation';

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getContentService } from '@/services/factory';
 import Link from 'next/link';
 import { Card } from '@/components/ui/Card';

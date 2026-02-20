@@ -36,6 +36,7 @@ export interface BlogPayload {
 export async function createPost(payload: BlogPayload) {
   const result = await apiFetch('/api/blog', { method: 'POST', body: JSON.stringify(payload) });
   revalidatePath('/blog');
+  revalidatePath('/admin/blog');
   return result;
 }
 
@@ -43,12 +44,14 @@ export async function updatePost(slug: string, payload: Partial<Omit<BlogPayload
   const result = await apiFetch(`/api/blog/${slug}`, { method: 'PUT', body: JSON.stringify(payload) });
   revalidatePath('/blog');
   revalidatePath(`/blog/${slug}`);
+  revalidatePath('/admin/blog');
   return result;
 }
 
 export async function deletePost(slug: string) {
   const result = await apiFetch(`/api/blog/${slug}`, { method: 'DELETE' });
   revalidatePath('/blog');
+  revalidatePath('/admin/blog');
   return result;
 }
 
@@ -76,6 +79,7 @@ export interface ModulePayload {
 export async function createModule(payload: ModulePayload) {
   const result = await apiFetch('/api/playbook', { method: 'POST', body: JSON.stringify(payload) });
   revalidatePath('/playbook');
+  revalidatePath('/admin/playbook');
   return result;
 }
 
@@ -93,12 +97,14 @@ export async function updateModule(
   const result = await apiFetch(`/api/playbook/${slug}`, { method: 'PUT', body: JSON.stringify(payload) });
   revalidatePath('/playbook');
   revalidatePath(`/playbook/${slug}`);
+  revalidatePath('/admin/playbook');
   return result;
 }
 
 export async function deleteModule(slug: string) {
   const result = await apiFetch(`/api/playbook/${slug}`, { method: 'DELETE' });
   revalidatePath('/playbook');
+  revalidatePath('/admin/playbook');
   return result;
 }
 
