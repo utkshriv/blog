@@ -81,7 +81,8 @@ export class AwsContentService implements ContentService {
             const result = await dynamoDb.send(new QueryCommand({
                 TableName: PLAYBOOK_TABLE_NAME,
                 IndexName: 'playbook-collection-gsi',
-                KeyConditionExpression: 'collection = :collection',
+                KeyConditionExpression: '#collection = :collection',
+                ExpressionAttributeNames: { '#collection': 'collection' },
                 ExpressionAttributeValues: {
                     ':collection': 'PLAYBOOK'
                 }

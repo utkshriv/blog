@@ -7,6 +7,8 @@ import LeetCodeTracker from '@/components/LeetCodeTracker';
 import { TerminalBackground } from '@/components/ui/TerminalBackground';
 import styles from './page.module.css';
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
     title: 'Playbook // botthef',
     description: 'Structured learning modules for cracking the code interview.',

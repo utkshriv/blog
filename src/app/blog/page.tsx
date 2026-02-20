@@ -5,6 +5,8 @@ import { Badge } from '@/components/ui/Badge'
 import { BlogPostAnimation } from '@/components/ui/BlogPostAnimation'
 import styles from './page.module.css'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Blog // botthef',
   description: 'Thoughts, learnings, and documentation of my journey.',
