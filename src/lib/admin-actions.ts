@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { getBackendToken } from '@/lib/auth';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '';
@@ -33,15 +34,22 @@ export interface BlogPayload {
 }
 
 export async function createPost(payload: BlogPayload) {
-  return apiFetch('/api/blog', { method: 'POST', body: JSON.stringify(payload) });
+  const result = await apiFetch('/api/blog', { method: 'POST', body: JSON.stringify(payload) });
+  revalidatePath('/blog');
+  return result;
 }
 
 export async function updatePost(slug: string, payload: Partial<Omit<BlogPayload, 'slug'>>) {
-  return apiFetch(`/api/blog/${slug}`, { method: 'PUT', body: JSON.stringify(payload) });
+  const result = await apiFetch(`/api/blog/${slug}`, { method: 'PUT', body: JSON.stringify(payload) });
+  revalidatePath('/blog');
+  revalidatePath(`/blog/${slug}`);
+  return result;
 }
 
 export async function deletePost(slug: string) {
-  return apiFetch(`/api/blog/${slug}`, { method: 'DELETE' });
+  const result = await apiFetch(`/api/blog/${slug}`, { method: 'DELETE' });
+  revalidatePath('/blog');
+  return result;
 }
 
 // ── Playbook ──────────────────────────────────────────────────────────────────
@@ -66,7 +74,9 @@ export interface ModulePayload {
 }
 
 export async function createModule(payload: ModulePayload) {
-  return apiFetch('/api/playbook', { method: 'POST', body: JSON.stringify(payload) });
+  const result = await apiFetch('/api/playbook', { method: 'POST', body: JSON.stringify(payload) });
+  revalidatePath('/playbook');
+  return result;
 }
 
 export async function updateModule(
@@ -80,11 +90,16 @@ export async function updateModule(
     delete_problem_ids?: string[];
   }
 ) {
-  return apiFetch(`/api/playbook/${slug}`, { method: 'PUT', body: JSON.stringify(payload) });
+  const result = await apiFetch(`/api/playbook/${slug}`, { method: 'PUT', body: JSON.stringify(payload) });
+  revalidatePath('/playbook');
+  revalidatePath(`/playbook/${slug}`);
+  return result;
 }
 
 export async function deleteModule(slug: string) {
-  return apiFetch(`/api/playbook/${slug}`, { method: 'DELETE' });
+  const result = await apiFetch(`/api/playbook/${slug}`, { method: 'DELETE' });
+  revalidatePath('/playbook');
+  return result;
 }
 
 // ── Upload URL ────────────────────────────────────────────────────────────────
