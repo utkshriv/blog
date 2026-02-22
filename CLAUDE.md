@@ -177,7 +177,7 @@ The admin area is protected by OAuth-based authentication and restricted to whit
 - `src/lib/aws-client.ts` - DynamoDB & S3 client configuration
 
 **Type Definitions**:
-- `src/types/index.ts` - `Post`, `Module`, `Problem` interfaces
+- `src/types/index.ts` - `Post`, `Module`, `Problem`, `LeetCodeStats` interfaces
 
 **Routing**:
 - `src/app/page.tsx` - Home (portfolio landing)
@@ -186,7 +186,7 @@ The admin area is protected by OAuth-based authentication and restricted to whit
 
 **Critical Components**:
 - `src/components/ui/TerminalBackground.tsx` - Animated terminal (typing effect, loops)
-- `src/components/LeetCodeTracker.tsx` - Stats display (hardcoded, update here for changes)
+- `src/components/LeetCodeTracker.tsx` - Stats display (server component, receives `stats: LeetCodeStats | null` prop from playbook page)
 
 ---
 
@@ -243,7 +243,7 @@ ADMIN_EMAIL=your-email@example.com
 NEXT_PUBLIC_API_URL=<api-gateway-url>
 ```
 
-**Without AWS credentials**: App automatically falls back to `MockContentService` and reads from `src/content/blog/`.
+**Without AWS credentials**: App automatically falls back to `MockContentService` and reads from `src/content/blog/`. `MockContentService.getLeetCodeStats()` returns real current counts (easy: 41, medium: 85, hard: 14, total: 140).
 
 **Error handling**: Services return empty arrays `[]` or `null` on errors (logged to console).
 

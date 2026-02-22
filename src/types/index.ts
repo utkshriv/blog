@@ -25,3 +25,11 @@ export interface Module {
     content: string; // MDX content for the concept
     problems: Problem[];
 }
+
+export interface LeetCodeStats {
+    easy: number;
+    medium: number;
+    hard: number;
+    total: number;
+    syncedAt?: string;
+}

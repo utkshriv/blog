@@ -16,7 +16,10 @@ export const metadata = {
 
 export default async function ModulesPage() {
     const service = getContentService();
-    const modules = await service.getModules();
+    const [modules, leetCodeStats] = await Promise.all([
+        service.getModules(),
+        service.getLeetCodeStats(),
+    ]);
 
     return (
         <section className={styles.section}>
@@ -56,7 +59,7 @@ export default async function ModulesPage() {
                 {/* Right Pane - Tracker + Terminal */}
                 <div className={styles.rightPane}>
                     <div className={styles.trackerSection}>
-                        <LeetCodeTracker />
+                        <LeetCodeTracker stats={leetCodeStats} />
                     </div>
                     <div className={styles.terminalSection}>
                         <TerminalBackground />

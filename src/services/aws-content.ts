@@ -1,5 +1,5 @@
 import { ContentService } from './content';
-import { Module, Post, Problem } from '@/types';
+import { LeetCodeStats, Module, Post, Problem } from '@/types';
 import { dynamoDb, s3 } from '@/lib/aws-client';
 import { ScanCommand, GetCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
@@ -176,6 +176,27 @@ export class AwsContentService implements ContentService {
             };
         } catch (error) {
             console.error(`Error fetching module ${slug}:`, error);
+            return null;
+        }
+    }
+
+    async getLeetCodeStats(): Promise<LeetCodeStats | null> {
+        try {
+            const result = await dynamoDb.send(new GetCommand({
+                TableName: BLOG_TABLE_NAME,
+                Key: { PK: 'LEETCODE#stats', SK: 'METADATA' }
+            }));
+            if (!result.Item) return null;
+            const item = result.Item;
+            return {
+                easy: item.easy ?? 0,
+                medium: item.medium ?? 0,
+                hard: item.hard ?? 0,
+                total: item.total ?? 0,
+                syncedAt: item.syncedAt,
+            };
+        } catch (error) {
+            console.error('Error fetching LeetCode stats:', error);
             return null;
         }
     }

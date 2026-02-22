@@ -1,16 +1,13 @@
-'use client'
-
 import React from 'react'
+import { LeetCodeStats } from '@/types'
 import styles from './LeetCodeTracker.module.css'
 
-export default function LeetCodeTracker() {
-    // Hardcoded for now, can be replaced with API data later
-    const stats = {
-        easy: 12,
-        medium: 5,
-        hard: 1,
-        total: 18
-    }
+interface Props {
+    stats: LeetCodeStats | null;
+}
+
+export default function LeetCodeTracker({ stats }: Props) {
+    const display = stats ?? { easy: 0, medium: 0, hard: 0, total: 0 }
 
     return (
         <div className={styles.container}>
@@ -20,22 +17,22 @@ export default function LeetCodeTracker() {
             <div className={styles.stats}>
                 <div className={styles.stat}>
                     <div className={styles.dotEasy}></div>
-                    <div className={styles.valueEasy}>{stats.easy}</div>
+                    <div className={styles.valueEasy}>{display.easy}</div>
                     <div className={styles.label}>Easy</div>
                 </div>
                 <div className={styles.stat}>
                     <div className={styles.dotMedium}></div>
-                    <div className={styles.valueMedium}>{stats.medium}</div>
+                    <div className={styles.valueMedium}>{display.medium}</div>
                     <div className={styles.label}>Medium</div>
                 </div>
                 <div className={styles.stat}>
                     <div className={styles.dotHard}></div>
-                    <div className={styles.valueHard}>{stats.hard}</div>
+                    <div className={styles.valueHard}>{display.hard}</div>
                     <div className={styles.label}>Hard</div>
                 </div>
             </div>
             <div className={styles.total}>
-                Total: {stats.total} problems solved
+                Total: {display.total} problems solved
             </div>
         </div>
     )

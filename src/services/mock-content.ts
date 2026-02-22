@@ -1,5 +1,5 @@
 import { ContentService } from './content';
-import { Module, Post } from '@/types';
+import { LeetCodeStats, Module, Post } from '@/types';
 
 const MOCK_MODULES: Module[] = [
     {
@@ -69,5 +69,9 @@ export class MockContentService implements ContentService {
             };
         }
         return null;
+    }
+
+    async getLeetCodeStats(): Promise<LeetCodeStats | null> {
+        return { easy: 41, medium: 85, hard: 14, total: 140 };
     }
 }
