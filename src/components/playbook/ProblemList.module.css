@@ -26,8 +26,7 @@
 
 .item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     padding: 1rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -37,6 +36,16 @@
 
 .item:hover {
     border-color: var(--primary);
+}
+
+.itemExpanded {
+    border-color: var(--primary);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .info {
@@ -81,5 +90,55 @@
 
 .actions {
     display: flex;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.chevron {
+    font-size: 1.25rem;
+    color: var(--primary);
+    line-height: 1;
+    display: inline-block;
+    transform: rotate(0deg);
+    transition: transform 0.2s ease;
+    user-select: none;
+}
+
+.chevronOpen {
+    transform: rotate(90deg);
+}
+
+/* Pseudocode expand/collapse */
+.pseudocode {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+    overflow: hidden;
+}
+
+.pseudocodeOpen {
+    grid-template-rows: 1fr;
+}
+
+.pseudocodeLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    display: block;
+    padding-top: 1rem;
+    padding-bottom: 0.25rem;
+}
+
+.pseudocodeContent {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--foreground);
+    background: var(--background);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    white-space: pre-wrap;
+    margin: 0;
 }

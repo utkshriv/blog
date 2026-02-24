@@ -16,6 +16,7 @@ export interface Problem {
     lastSolved?: string; // ISO Date
     nextReview?: string; // ISO Date
     status?: "New" | "Due" | "Review";
+    pseudocode?: string;
 }
 
 export interface Module {

@@ -160,6 +160,7 @@ export class AwsContentService implements ContentService {
                     status: item.status,
                     lastSolved: item.lastSolved,
                     nextReview: item.nextReview,
+                    pseudocode: item.pseudocode,
                 } as Problem));
 
             let content = '';
