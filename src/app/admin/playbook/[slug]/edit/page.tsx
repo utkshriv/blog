@@ -21,7 +21,7 @@ export default async function EditModulePage({ params }: { params: { slug: strin
     leetcodeUrl: p.link,
     difficulty: p.difficulty,
     status: p.status ?? 'New',
-    pseudocode: '',
+    pseudocode: p.pseudocode ?? '',
     tags: [],
   }));
 
