@@ -38,29 +38,26 @@ export function ProblemList({ problems }: ProblemListProps) {
                             style={{ cursor: hasPseudocode ? 'pointer' : 'default' }}
                         >
                             <div className={styles.row}>
-                                <div className={styles.info}>
-                                    <div className={styles.header}>
-                                        <span className={styles.id}>#{problem.id}</span>
-                                        <Link
-                                            href={problem.link}
-                                            target="_blank"
-                                            className={styles.link}
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            {problem.title}
-                                        </Link>
-                                        <Badge variant={
-                                            problem.difficulty === 'Easy' ? 'accent' :
-                                                problem.difficulty === 'Medium' ? 'secondary' : 'default'
-                                        }>
-                                            {problem.difficulty}
-                                        </Badge>
-                                    </div>
-                                    <div className={styles.status}>
-                                        {problem.status === 'Due' && <span className={styles.due}>Review Due</span>}
-                                        {problem.nextReview && <span className={styles.date}>Next: {new Date(problem.nextReview).toLocaleDateString()}</span>}
-                                    </div>
+                                <span className={styles.id}>#{problem.id}</span>
+                                <div className={styles.titleGroup}>
+                                    <Link
+                                        href={problem.link}
+                                        target="_blank"
+                                        className={styles.link}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        {problem.title}
+                                    </Link>
+                                    {(problem.status === 'Due' || problem.nextReview) && (
+                                        <div className={styles.status}>
+                                            {problem.status === 'Due' && <span className={styles.due}>Review Due</span>}
+                                            {problem.nextReview && <span className={styles.date}>Next: {new Date(problem.nextReview).toLocaleDateString()}</span>}
+                                        </div>
+                                    )}
                                 </div>
+                                <Badge className={styles[`diff${problem.difficulty}`]}>
+                                    {problem.difficulty}
+                                </Badge>
                                 <div className={styles.actions}>
                                     {hasPseudocode && (
                                         <span className={`${styles.chevron} ${isExpanded ? styles.chevronOpen : ''}`}>
